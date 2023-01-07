@@ -30,7 +30,7 @@ If you plan to build DijetsNodeGo from source, you will also need the following 
 Clone the DijetsNodeGo repository:
 
 ```sh
-git clone git@github.com:lasthyphen/dijetsnodego.git
+git clone git@github.com:Dijets-Inc/dijetsnodego.git
 cd dijetsnodego
 ```
 
@@ -52,7 +52,7 @@ The output of the script will be the Dijets binary named `dijetsnodego`. It is l
 
 ### Binary Install
 
-Download the [latest build](https://github.com/lasthyphen/dijetsnodego/releases/latest) for your operating system and architecture.
+Download the [latest build](https://github.com/Dijets-Inc/dijetsnodego/releases/latest) for your operating system and architecture.
 
 The Dijets binary to be executed is named `dijetsnodego`.
 
@@ -72,7 +72,7 @@ To check the built image, run:
 docker image ls
 ```
 
-The image should be tagged as `hyphenesc/dijetsnodego:xxxxxxxx`, where `xxxxxxxx` is the shortened commit of the Dijets source it was built from. To run the avalanche node, run:
+The image should be tagged as `hyphenesc/dijetsnodego:xxxxxxxx`, where `xxxxxxxx` is the shortened commit of the Dijets source it was built from. To run the dijets node, run:
 
 ```sh
 docker run -ti -p 9650:9650 -p 9651:9651 hyphenesc/dijetsnodego:xxxxxxxx /dijetsnodego/build/dijetsnodego
@@ -112,7 +112,7 @@ The bottleneck during bootstrapping is typically database IO. Using a more power
 
 ## Generating Code
 
-Avalanchego uses multiple tools to generate efficient and boilerplate code.
+Dijets Node Binary uses multiple tools to generate efficient and boilerplate code.
 
 ### Running protobuf codegen
 
@@ -149,8 +149,8 @@ For more information, refer to the [GRPC Golang Quick Start Guide](https://grpc.
 ### Running protobuf codegen from docker
 
 ```sh
-docker build -t avalanche:protobuf_codegen -f api/Dockerfile.buf .
-docker run -t -i -v $(pwd):/opt/avalanche -w/opt/avalanche avalanche:protobuf_codegen bash -c "scripts/protobuf_codegen.sh"
+docker build -t dijetsnode:protobuf_codegen -f api/Dockerfile.buf .
+docker run -t -i -v $(pwd):/opt/dijetsnode -w/opt/dijetsnode dijetsnode:protobuf_codegen bash -c "scripts/protobuf_codegen.sh"
 ```
 
 ### Running mock codegen
@@ -163,7 +163,7 @@ This should only be necessary when modifying exported interfaces or after modify
 
 ### Library Compatibility Guarantees
 
-Because DijetsNodeGo's version denotes the network version, it is expected that interfaces exported by DijetsNodeGo's packages may change in `Patch` version updates.
+The release version for each DijetsNodeGo binary is essentially also the version of the network itself. It is expected that interfaces exported by DijetsNodeGo's packages may change in `Patch` version updates.
 
 ### API Compatibility Guarantees
 
@@ -171,33 +171,16 @@ APIs exposed when running DijetsNodeGo will maintain backwards compatibility, un
 
 ## Supported Platforms
 
-DijetsNodeGo can run on different platforms, with different support tiers:
+DijetsNodeGo can run on different platforms, with different levels of stress testing achieved through its development:
 
-- **Tier 1**: Fully supported by the maintainers, guaranteed to pass all tests including e2e and stress tests.
-- **Tier 2**: Passes all unit and integration tests but not necessarily e2e tests.
-- **Tier 3**: Builds but lightly tested (or not), considered _experimental_.
-- **Not supported**: May not build and not tested, considered _unsafe_. To be supported in the future.
+The following table lists currently supported platforms:
 
-The following table lists currently supported platforms and their corresponding
-DijetsNodeGo support tiers:
-
-| Architecture | Operating system | Support tier  |
-| :----------: | :--------------: | :-----------: |
-|    amd64     |      Linux       |       1       |
-|    arm64     |      Linux       |       2       |
-|    amd64     |      Darwin      |       2       |
-|    amd64     |     Windows      |       3       |
-|     arm      |      Linux       | Not supported |
-|     i386     |      Linux       | Not supported |
-|    arm64     |      Darwin      | Not supported |
-
-To officially support a new platform, one must satisfy the following requirements:
-
-| DijetsNodeGo continuous integration | Tier 1  | Tier 2  | Tier 3  |
-| ---------------------------------- | :-----: | :-----: | :-----: |
-| Build passes                       | &check; | &check; | &check; |
-| Unit and integration tests pass    | &check; | &check; |         |
-| End-to-end and stress tests pass   | &check; |         |         |
+| Architecture | Operating system |
+| :----------: | :--------------: | 
+|    amd64     |      Linux       |    
+|    arm64     |      Linux       |     
+|    amd64     |      Darwin      |   
+|    amd64     |     Windows      |  (Windows OS is not yet qualified as fully stress tested)
 
 DijetsNodeGo is a tweaked fork of AvalancheGo which maintains upstream changes.
 
