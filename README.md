@@ -92,19 +92,19 @@ You should see some pretty ASCII art and log messages.
 
 You can use `Ctrl+C` to kill the node.
 
-### Connecting to Fuji
+### Connecting to Hal Testnet
 
-To connect to the Fuji Testnet, run:
+To connect to the Hal Testnet, run:
 
 ```sh
-./build/dijetsnodego --network-id=fuji
+./build/dijetsnodego --network-id=hal
 ```
 
 ## Bootstrapping
 
 A node needs to catch up to the latest network state before it can participate in consensus and serve API calls. This process, called bootstrapping, currently takes several days for a new node connected to Mainnet.
 
-A node will not [report healthy](https://docs.djtx.network/build/dijetsnodego-apis/health) until it is done bootstrapping.
+A node will not [report healthy](https://docs.dijets.io/dijetsnodego-apis/health) until it is done bootstrapping.
 
 Improvements that reduce the amount of time it takes to bootstrap are under development.
 
